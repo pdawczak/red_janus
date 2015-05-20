@@ -6,7 +6,10 @@ require "minitest/rails"
 require "minitest/rails/capybara"
 require "minitest/reporters"
 
-Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::JUnitReporter.new]
+Minitest::Reporters.use! [
+  Minitest::Reporters::SpecReporter.new,
+  Minitest::Reporters::JUnitReporter.new(ENV["CIRCLE_TEST_REPORTS"] || "test/reports")
+]
 
 class ActiveSupport::TestCase
     ActiveRecord::Migration.check_pending!
