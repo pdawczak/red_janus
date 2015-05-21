@@ -50,3 +50,4 @@ group :test do
   gem "minitest-reporters"
 end
 
+gem "devise"
