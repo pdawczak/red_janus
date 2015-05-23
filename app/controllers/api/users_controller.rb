@@ -12,15 +12,6 @@ class Api::UsersController < ApplicationController
   def show
   end
 
-  # GET /api/users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /api/users/1/edit
-  def edit
-  end
-
   # POST /api/users
   # POST /api/users.json
   def create
@@ -28,10 +19,8 @@ class Api::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to [:api, @user], notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: [:api, @user] }
       else
-        format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +31,8 @@ class Api::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to [:api, @user], notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: [:api, @user] }
       else
-        format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -56,7 +43,6 @@ class Api::UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to api_users_url, notice: "User has been destroyed." }
       format.json { head :no_content }
     end
   end
