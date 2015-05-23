@@ -5,6 +5,11 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-pdawczak:
-  email: pdawczak@uis.com.ac.uk
+joe:
+  email:        joe@uis.com.ac.uk
+  title:        Mr
+  first_names:  Joe
+  middle_names: von
+  last_names:   Tester
+  dob:          1978-07-10
   encrypted_password: <%= User.new.send(:password_digest, UserTestSupport::TEST_PASSWORD)
