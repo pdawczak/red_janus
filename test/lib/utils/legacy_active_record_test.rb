@@ -1,6 +1,16 @@
 require "test_helper"
 
 class LegacyActiveRecordTest < ActiveSupport::TestCase
+  test "properly initializes model rewriting keys" do
+    attrs = { plainPassword: "cxztest" }
+    model = TestModel.new(attrs)
+    assert_equal "cxztest", model.password
+
+    attrs = { "plainPassword" => "testing321" }
+    model = TestModel.new(attrs)
+    assert_equal "testing321", model.password
+  end
+
   test "lets configure attr key rewrites" do
     attrs = { "plain_password" => "test123" }
     model = TestModel.new(attrs)
