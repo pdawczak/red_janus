@@ -36,52 +36,72 @@ module Utils
     end
 
     def initialize(attrs = {})
-      super(self.class.rewrite_keys(attrs))
+      super(rewrite_keys(attrs))
     end
 
-    def decrement(attr, by = 1)
-      super(self.class.rewrite_attr_name(attr), by)
+    def decrement(*params)
+      super(*rewrite_first_param_attr_name(params))
     end
 
-    def decrement!(attr, by = 1)
-      super(self.class.rewrite_attr_name(attr), by)
+    def decrement!(*params)
+      super(*rewrite_first_param_attr_name(params))
     end
 
-    def increment(attr, by = 1)
-      super(self.class.rewrite_attr_name(attr), by)
+    def increment(*params)
+      super(*rewrite_first_param_attr_name(params))
     end
 
-    def increment!(attr, by = 1)
-      super(self.class.rewrite_attr_name(attr), by)
+    def increment!(*params)
+      super(*rewrite_first_param_attr_name(params))
     end
 
-    def toggle(attr)
-      super(self.class.rewrite_attr_name(attr))
+    def toggle(*params)
+      super(*rewrite_first_param_attr_name(params))
     end
 
-    def toggle!(attr)
-      super(self.class.rewrite_attr_name(attr))
+    def toggle!(*params)
+      super(*rewrite_first_param_attr_name(params))
     end
 
     def touch(*attrs)
-      rewritten_attrs = attrs.map { |attr| self.class.rewrite_attr_name(attr) }
+      rewritten_attrs = attrs.map { |attr| rewrite_attr_name(attr) }
       super(*rewritten_attrs)
     end
     
-    def update(attrs)
-      super(self.class.rewrite_keys(attrs))
+    def update(*params)
+      super(*rewrite_first_param_keys(params))
     end
 
-    def update!(attrs)
-      super(self.class.rewrite_keys(attrs))
+    def update!(*params)
+      super(*rewrite_first_param_keys(params))
     end
 
-    def update_attr(attr, val)
-      super(self.class.rewrite_attr_name(attr), val)
+    def update_attr(*params)
+      super(*rewrite_first_param_attr_name(params))
     end
 
-    def update_columns(attrs)
-      super(self.class.rewrite_keys(attrs))
+    def update_columns(*params)
+      super(*rewrite_first_param_keys(params))
+    end
+
+    private
+
+    def rewrite_attr_name(attr)
+      self.class.rewrite_attr_name(attr)
+    end
+
+    def rewrite_keys(attrs)
+      self.class.rewrite_keys(attrs)
+    end
+
+    def rewrite_first_param_attr_name(params)
+      params[0] = rewrite_attr_name(params[0])
+      params
+    end
+
+    def rewrite_first_param_keys(params)
+      params[0] = rewrite_keys(params[0])
+      params
     end
   end
 end
