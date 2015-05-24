@@ -1,5 +1,6 @@
 module Utils
   module LegacyActiveRecord
+    using LegacyizeHash
 
     def self.included(obj)
       obj.extend(KlassMethods)
@@ -36,7 +37,7 @@ module Utils
     end
 
     def initialize(attrs = {})
-      super(rewrite_keys(attrs))
+      super(rewrite_keys(attrs.legacyize))
     end
 
     def decrement(*params)
@@ -100,7 +101,7 @@ module Utils
     end
 
     def rewrite_first_param_keys(params)
-      params[0] = rewrite_keys(params[0])
+      params[0] = rewrite_keys(params[0].legacyize)
       params
     end
   end
