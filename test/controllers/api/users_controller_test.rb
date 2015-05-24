@@ -3,7 +3,7 @@ require "test_helper"
 class Api::UsersControllerTest < ActionController::TestCase
 
   def user
-    @user ||= users(:pdawczak)
+    @user ||= users(:joe)
   end
 
   def test_index
@@ -13,8 +13,18 @@ class Api::UsersControllerTest < ActionController::TestCase
   end
 
   def test_create
+    user_params = {
+      plainPassword: "testinguser",
+      email:         "sample@email.com",
+      title:         "Mr",
+      firstNames:    "Joe",
+      middleNames:   "von",
+      lastNames:     "Tester",
+      dob:           "1978-07-10"
+    }
+
     assert_difference('User.count') do
-      post :create, user: { email: "sample@email.com", password: "testingsuper" }, format: :json
+      post :create, { format: :json }.merge(user_params)
     end
 
     assert_response :created
@@ -26,7 +36,12 @@ class Api::UsersControllerTest < ActionController::TestCase
   end
 
   def test_update
-    put :update, id: user, user: { email: "different@email.com" }, format: :json
+    user_params = {
+      email: "different@email.com",
+      plainPassword: "$uperTest!"
+    }
+
+    put :update, { id: user, format: :json }.merge(user_params)
     assert_response :success
   end
 
