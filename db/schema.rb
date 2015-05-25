@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20150524195821) do
     t.datetime "updated_at"
     t.string   "title",                  limit: 8,               null: false
     t.string   "first_names",                                    null: false
-    t.string   "middle_names"
+    t.string   "middle_names",                      default: ""
     t.string   "last_names",                                     null: false
     t.date     "dob",                                            null: false
     t.string   "username",               limit: 10,              null: false
