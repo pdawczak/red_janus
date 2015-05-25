@@ -7,6 +7,10 @@ class Api::UsersController < ApplicationController
     @users = User.all
   end
 
+  def search
+    @users = User.search(params[:term])
+  end
+
   # GET /api/users/1
   # GET /api/users/1.json
   def show

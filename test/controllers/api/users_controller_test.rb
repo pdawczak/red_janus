@@ -12,6 +12,16 @@ class Api::UsersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:users)
   end
 
+  def test_search
+    get :search, term: "jo", format: :json
+    assert_response :success
+    assert_includes assigns(:users), users(:joe)
+
+    get :search, term: "baz", format: :json
+    assert_response :success
+    assert_not_includes assigns(:users), users(:joe)
+  end
+
   def test_create
     user_params = {
       plainPassword: "testinguser",
