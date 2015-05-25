@@ -31,7 +31,7 @@ class Api::UsersControllerTest < ActionController::TestCase
   end
 
   def test_show
-    get :show, id: user, format: :json
+    get :show, username: user.username, format: :json
     assert_response :success
   end
 
@@ -41,13 +41,13 @@ class Api::UsersControllerTest < ActionController::TestCase
       plainPassword: "$uperTest!"
     }
 
-    put :update, { id: user, format: :json }.merge(user_params)
+    put :update, { username: user.username, format: :json }.merge(user_params)
     assert_response :success
   end
 
   def test_destroy
     assert_difference('User.count', -1) do
-      delete :destroy, id: user, format: :json
+      delete :destroy, username: user.username, format: :json
     end
 
     assert_response :no_content
