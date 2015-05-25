@@ -20,6 +20,10 @@ class Api::UsersControllerTest < ActionController::TestCase
     get :search, term: "baz", format: :json
     assert_response :success
     assert_not_includes assigns(:users), users(:joe)
+
+    get :search, term: "sue", format: :json
+    assert_response :success
+    assert_not_includes assigns(:users), users(:sue)
   end
 
   def test_create

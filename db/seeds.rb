@@ -11,6 +11,7 @@ User.create({ email:        "sue@example.com",
               title:        "Ms",
               first_names:  "Sue",
               last_names:   "Fixture",
+              enabled:      false,
               dob:          Date.parse("1973-05-12") })
 
 User.create({ email:        "foo@example.com",
