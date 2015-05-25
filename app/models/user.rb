@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   before_create :set_username
 
+  validates :title, :first_names, :last_names, :dob, presence: true
+
   def full_name
     "#{first_names} #{middle_names} #{last_names}".squeeze
   end
