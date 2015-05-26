@@ -7,7 +7,8 @@ Rails.application.routes.draw do
         end
 
         member do
-          put :name, action: :update_name, as: :update_name
+          put :name,     action: :update_name,     as: :update_name
+          put :password, action: :update_password, as: :update_password
         end
       end
     end

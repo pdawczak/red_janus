@@ -1,5 +1,6 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :update_name, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :update_name, 
+                                  :update_password, :destroy]
 
   # GET /api/users
   # GET /api/users.json
@@ -42,6 +43,14 @@ class Api::UsersController < ApplicationController
   def update_name
     if @user.update(params.permit(:title, :firstNames, :middleNames, :lastNames))
       render :show, status: :ok, location: [:api, @user]
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update_password
+    if @user.update(params.permit(:plainPassword))
+      head :no_content
     else
       render json: @user.errors, status: :unprocessable_entity
     end

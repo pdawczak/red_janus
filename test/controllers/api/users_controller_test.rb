@@ -83,6 +83,15 @@ class Api::UsersControllerTest < ActionController::TestCase
     assert_includes assigns(:user).errors.messages, :last_names
   end
 
+  def test_update_password
+    put :update_password, { username: user.username, format: :json }.merge({ plainPassword: "SupErTest1234" })
+    assert_response :no_content
+
+    put :update_password, { username: user.username, format: :json }.merge({ plainPassword: "pass" })
+    assert_response :unprocessable_entity
+    assert_includes assigns(:user).errors.messages, :password
+  end
+
   def test_destroy
     assert_difference('User.count', -1) do
       delete :destroy, username: user.username, format: :json
