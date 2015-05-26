@@ -9,6 +9,7 @@ class Api::UsersController < ApplicationController
 
   def search
     @users = User.search(params[:term])
+    render :index
   end
 
   # GET /api/users/1
