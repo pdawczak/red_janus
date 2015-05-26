@@ -21,24 +21,20 @@ class Api::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    respond_to do |format|
-      if @user.save
-        format.json { render :show, status: :created, location: [:api, @user] }
-      else
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      render :show, status: :created, location: [:api, @user]
+    else
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/users/1
   # PATCH/PUT /api/users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.json { render :show, status: :ok, location: [:api, @user] }
-      else
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      render :show, status: :ok, location: [:api, @user]
+    else
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
@@ -54,9 +50,7 @@ class Api::UsersController < ApplicationController
   # DELETE /api/users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
