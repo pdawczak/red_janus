@@ -5,6 +5,10 @@ Rails.application.routes.draw do
         collection do
           get "search/:term", action: :search, as: :search
         end
+
+        member do
+          put :name, action: :update_name, as: :update_name
+        end
       end
     end
   end

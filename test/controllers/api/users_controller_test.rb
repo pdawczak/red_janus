@@ -59,6 +59,30 @@ class Api::UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  def test_update_name
+    user_params = { title:       "Dr",
+                    firstNames:  "John",
+                    middleNames: "at",
+                    lastNames:   "Ruby" }
+
+    put :update_name, { username: user.username, format: :json }.merge(user_params)
+    assert_response :success
+    assert_equal "Dr",   assigns(:user).title
+    assert_equal "John", assigns(:user).first_names
+    assert_equal "at",   assigns(:user).middle_names
+    assert_equal "Ruby", assigns(:user).last_names
+
+    user_params = { title:       "Dr",
+                    firstNames:  "",
+                    middleNames: "at",
+                    lastNames:   nil}
+
+    put :update_name, { username: user.username, format: :json }.merge(user_params)
+    assert_response :unprocessable_entity
+    assert_includes assigns(:user).errors.messages, :first_names
+    assert_includes assigns(:user).errors.messages, :last_names
+  end
+
   def test_destroy
     assert_difference('User.count', -1) do
       delete :destroy, username: user.username, format: :json
