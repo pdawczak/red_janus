@@ -92,6 +92,11 @@ class Api::UsersControllerTest < ActionController::TestCase
     assert_includes assigns(:user).errors.messages, :password
   end
 
+  def test_update_enabled
+    put :update_enabled, { username: user.username, format: :json }.merge({ enabled: false })
+    assert_response :no_content
+  end
+
   def test_destroy
     assert_difference('User.count', -1) do
       delete :destroy, username: user.username, format: :json
