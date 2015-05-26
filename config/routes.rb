@@ -10,6 +10,7 @@ Rails.application.routes.draw do
           put :name,     action: :update_name,     as: :update_name
           put :password, action: :update_password, as: :update_password
           put :enabled,  action: :update_enabled,  as: :update_enabled
+          put :email,    action: :update_email,    as: :update_email
         end
       end
     end

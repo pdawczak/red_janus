@@ -97,6 +97,15 @@ class Api::UsersControllerTest < ActionController::TestCase
     assert_response :no_content
   end
 
+  def test_update_email
+    put :update_email, { username: user.username, format: :json }.merge({ email: "jon@super_test.com" })
+    assert_response :no_content
+
+    put :update_email, { username: user.username, format: :json }.merge({ email: "super_test.com" })
+    assert_response :unprocessable_entity
+    assert_includes assigns(:user).errors.messages, :email
+  end
+
   def test_destroy
     assert_difference('User.count', -1) do
       delete :destroy, username: user.username, format: :json
