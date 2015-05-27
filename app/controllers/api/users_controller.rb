@@ -1,7 +1,5 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :update_name, 
-                                  :update_password, :update_enabled, 
-                                  :update_email, :update_dob, :destroy]
+  before_action :set_user, except: [:index, :search]
 
   # GET /api/users
   # GET /api/users.json
