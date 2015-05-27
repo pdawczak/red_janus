@@ -11,6 +11,7 @@ Rails.application.routes.draw do
           put :password, action: :update_password, as: :update_password
           put :enabled,  action: :update_enabled,  as: :update_enabled
           put :email,    action: :update_email,    as: :update_email
+          put :dob,      action: :update_dob,      as: :update_dob
         end
       end
     end

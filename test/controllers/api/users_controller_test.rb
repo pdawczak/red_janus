@@ -106,6 +106,17 @@ class Api::UsersControllerTest < ActionController::TestCase
     assert_includes assigns(:user).errors.messages, :email
   end
 
+  def test_update_dob
+    put :update_dob, { username: user.username, format: :json }.merge({ dob: "2015-01-01" })
+    assert_response :no_content
+    user.reload
+    assert_equal "2015-01-01", user.dob.strftime("%Y-%m-%d")
+
+    put :update_dob, { username: user.username, format: :json }.merge({ dob: "23" })
+    assert_response :unprocessable_entity
+    assert_includes assigns(:user).errors.messages, :dob
+  end
+
   def test_destroy
     assert_difference('User.count', -1) do
       delete :destroy, username: user.username, format: :json
