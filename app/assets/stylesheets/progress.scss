@@ -1,0 +1,13 @@
+$nprogress-color: #f1f1f1;
+$nprogress-zindex: 9999999999;
+
+@import 'nprogress';
+// @import 'nprogress-bootstrap';
+
+#nprogress .spinner {
+  left: 15px;
+}
+
+.nprogress-wrapper {
+  z-index: $nprogress-zindex;
+}

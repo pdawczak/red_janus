@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "/dashboard" => "dashboard#index"
+  get "/messages"  => "messages#index"
+  get "/users"     => "users#index"
+
   scope constraints: { format: :json }, defaults: { format: :json } do
     namespace :api do
       resources :users, except: [:new, :edit], param: :username do
@@ -16,5 +20,8 @@ Rails.application.routes.draw do
       end
     end
   end
-  root "home#index"
+
+  get "/",      to: redirect("/dashboard")
+  get "/admin", to: redirect("/dashboard")
+  root "dashboard#index"
 end
