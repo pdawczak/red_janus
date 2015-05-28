@@ -12,5 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
+//= require jquery.slimscroll
+//= require app
+//= require nprogress
+//= require nprogress-turbolinks
+//= require nprogress-ajax
 //= require_tree .
+
+NProgress.configure({
+    showSpinner: true,
+    parent: '.main-header',
+    ease: 'ease',
+    speed: 500
+});

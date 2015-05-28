@@ -51,3 +51,7 @@ group :test do
 end
 
 gem "devise"
+
+gem "twitter-bootstrap-rails"
+gem "nprogress-rails"
+gem "faraday"
